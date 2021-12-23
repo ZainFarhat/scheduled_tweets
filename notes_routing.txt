@@ -1,0 +1,61 @@
+1.  Routes and Route Types
+
+refer to this link: https://www.youtube.com/watch?v=lwL_KWtflN0&list=PLm8ctt9NhMNV75T9WYIrA6m9I_uw7vS56&index=5
+
+config -> routes.rb is where we define our routes for the application
+
+we will configure the route to our about page here
+
+get "about" is a command that will respond to a get request to the about url
+to "about#index" will point it to a controller, in this case the about controller with an index action  
+
+then we go to app -> controllers
+inside we define a file named about_controller.rb
+
+the to "about#index" command will look for a file named about_controller
+naming convention is important, the genral way for get to routing is this
+get "<page_name>", to "<page_name>#index"
+then in app -> controllers we create a <page_name>_controller.rb
+
+in the about_controller.rb we will create a ruby class, it takes the following syntax
+class AboutController < ApplicationController
+
+the class naming convention is PageNameController, where the page name is capitalized and Controller is capitalized as well
+it should match the <page_name>_controller.rb name but with capitalized letters
+
+our class inherits from the Application Controller class to get all of the functionality from rails
+
+inside of out class we want to define our action
+
+
+class AboutController < ApplicationController
+
+    def index  
+    end
+
+end
+
+index method does not need to do anything at all, that is because we are inheriting from the Application Controller
+
+when it runs it will not do anything, but rails will look for app -> views -> about -> index.html.erb because for views we are asking for an html format and we are in the about index
+so we create the about folder and html file ourselves (this is the rendering part)
+the erb part of the file name allows us to write ruby syntax inside the html file using this erb syntax <%= %>
+
+now if we go to localhost:3000/about, we will view the content of the index.html.erb file
+
+we have a wrapper around this file called the layout, this is a folder called layout with three html.erb files, and this is going to define all of our style sheets , javascript, etc.
+
+2. Root Route
+
+we need to set the root route
+
+in the routes.rb file we add another get to command
+get "/", to:"main#index", the / is optional
+however, since root is a special thing we can replace this with
+root to:"main#index" 
+as before we add a file app -> controllers -> main_controller.rb
+then we go to app folder and create app -> views -> main -> index.html.erb
+now the main page localhost:3000 will show the contents of the index.html.erb in the app -> views -> main folder 
+
+
+
