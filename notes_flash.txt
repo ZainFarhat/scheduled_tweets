@@ -1,0 +1,46 @@
+1. Flash Messages
+
+in our main_controller.rb, specifically the index method, we will add
+    flash.now[:notice] = "logged in successfully"
+    flash.now[:alert] = "Invalid email or password"
+
+flash is a hash object, it sends messages to the user based on condition (success or failure)
+this is inherited from ApplicationController, a feature of rails controllers and views
+the .now method is used to only display at current request
+
+these are assigned in the controller, but to view them we need to print them out in the html files, specifically app -> views -> layout -> application.html.erb
+because flash messages are shared across entire application
+
+this is contained as a partial in a container as follows
+
+<div class="container">
+    <%= render partial: "shared/flash" %>
+<%= yield %>
+
+we will add a flash partial in shared folder, app -> views -> shared -> _flash.html.erb
+inside this we will add html ruby code as follows
+
+<%= flash[:notice] %>
+<%= flash[:alert] %>
+
+this will print out the contents of our flash messages
+
+this is a basic example of a flash message
+
+if we want to color code them we can add bootstrap code as follows
+
+<% if flash[:notice] %>
+    <div class="alert  alert-info mt-4" role = "alert">
+        <%= flash[:notice] %>
+    </div>
+<% end %>
+<% if flash[:alert] %>
+    <div class="alert  alert-warning mt-4" role = "alert">
+        <%= flash[:alert] %>
+    </div>
+<% end %>
+
+Note:
+
+<%=  %> is used when we want to print out the contents of the ruby code to views
+<% %> is used when we do not want to print out the contents of ruby code to views
